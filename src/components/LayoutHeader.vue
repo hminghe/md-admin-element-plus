@@ -25,7 +25,7 @@ function onClickLogout() {
 <template>
   <el-header class="layout-header" height="48px">
     <div class="logo" @click="onClickLogo">
-      <img src="/public/favicon.svg">
+      <img src="/favicon.svg">
       <span class="text-2xl ml-2">{{ appName }}</span>
 
       <div
