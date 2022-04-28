@@ -9,7 +9,7 @@ Mocking up web app with <b>MDAdmin</b><sup><em>(speed)</em></sup><br>
 <br>
 
 <p align='center'>
-<a href="https://vitesse.netlify.app/">Live Demo</a>
+<a href="https://mdadmin.netlify.app/">Live Demo</a>
 </p>
 
 <br>
