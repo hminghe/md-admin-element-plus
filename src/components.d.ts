@@ -4,7 +4,6 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Counter: typeof import('./components/Counter.vue')['default']
     ElAlert: typeof import('element-plus/es')['ElAlert']
     ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElBadge: typeof import('element-plus/es')['ElBadge']
@@ -56,7 +55,6 @@ declare module 'vue' {
     ElTag: typeof import('element-plus/es')['ElTag']
     ElTimePicker: typeof import('element-plus/es')['ElTimePicker']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
-    Footer: typeof import('./components/Footer.vue')['default']
     LayoutAside: typeof import('./components/LayoutAside.vue')['default']
     LayoutAsideMenu: typeof import('./components/LayoutAsideMenu.vue')['default']
     LayoutBreadcrumb: typeof import('./components/LayoutBreadcrumb.vue')['default']
