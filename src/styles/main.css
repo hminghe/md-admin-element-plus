@@ -1,0 +1,84 @@
+*,
+::before,
+::after {
+  border-width: 0;
+  border-style: solid;
+  border-color: var(--el-border-color);
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.link {
+  color: var(--el-color-primary);
+}
+
+a:active, a:hover {
+  text-decoration: none;
+  outline: 0;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  font-size: 14px;
+}
+
+html.dark {
+  background: #121212;
+}
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: rgb(13,148,136);
+  opacity: 0.75;
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+}
+
+flex {
+  display: flex;
+}
+
+.color-r {
+  color: var(--el-text-color-regular);
+}
+
+.color-s {
+  color: var(--el-text-color-secondary);
+}
+
+.el-empty .el-empty__image{
+  max-width: 80vw;
+}
+
+.el-tabs.tabs-content-none {
+
+}
+
+.el-tabs.tabs-content-none .el-tabs__header {
+  margin: 0;
+}
+
+.el-tabs.tabs-content-none .el-tabs__content {
+  display: none;
+}
+
+.el-tabs.tabs-content-none .el-tabs__nav-wrap::after {
+  display: none;
+}
