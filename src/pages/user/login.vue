@@ -11,8 +11,8 @@ const route = useRoute()
 
 const form$ = ref<FormInstance>()
 const form = reactive({
-  username: '',
-  password: '',
+  username: 'admin',
+  password: '123456',
 })
 
 const store = useUserStore()
@@ -33,9 +33,7 @@ const rules: FormRules = {
 </script>
 
 <template>
-  <div
-    class="login"
-  >
+  <div class="login">
     <div text-center>
       <div>
         <span font-600 text-4xl text-black:85>MDAdmin</span>
