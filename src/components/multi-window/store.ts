@@ -1,4 +1,5 @@
 import { useTitle } from '@vueuse/core'
+import { ElScrollbar } from 'element-plus'
 import { type Component, computed, defineComponent, h, markRaw, reactive } from 'vue'
 
 import { type RouteLocationNormalizedLoaded, useRoute, useRouter } from 'vue-router'
@@ -10,6 +11,8 @@ export interface Window {
   key: string
   fullPath: string
   name: string | null
+  scrollTop: number
+  scrollLeft: number
   refreshKey: number
   refreshCallback: ((next: () => void) => void)[]
   componentName: string
@@ -78,7 +81,27 @@ export default function useStore() {
     window.component = markRaw(defineComponent({
       name: `${window.fullPath}-${window.refreshKey}`,
       setup() {
-        return () => h(window.baseComponent!)
+        const scroll$ = ref<InstanceType<typeof ElScrollbar>>()
+
+        onActivated(() => {
+          const {
+            scrollTop,
+            scrollLeft,
+          } = window
+
+          scroll$.value?.scrollTo({
+            top: scrollTop,
+            left: scrollLeft,
+          })
+        })
+
+        return () => h(ElScrollbar, {
+          ref: (ref: any) => scroll$.value = ref,
+          onScroll({ scrollLeft, scrollTop }) {
+            window.scrollTop = scrollTop
+            window.scrollLeft = scrollLeft
+          },
+        }, h(window.baseComponent!))
       },
     }))
   }
@@ -94,6 +117,8 @@ export default function useStore() {
       key,
       fullPath,
       name: typeof meta.name === 'string' ? meta.name : '未设置名称',
+      scrollTop: 0,
+      scrollLeft: 0,
       refreshKey: 1,
       refreshCallback: [],
       componentName: route.name as string,

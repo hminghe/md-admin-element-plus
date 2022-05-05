@@ -10,11 +10,7 @@
 
       <el-container direction="vertical" flex-1 bg="gray-100">
         <LayoutTabs />
-        <el-scrollbar>
-          <div>
-            <multi-window-router />
-          </div>
-        </el-scrollbar>
+        <multi-window-router />
       </el-container>
     </el-container>
   </el-container>
