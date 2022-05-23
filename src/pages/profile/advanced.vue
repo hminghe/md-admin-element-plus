@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { createTableSummaryMethod, formatAmount, formatNumber } from '@/utils'
 import { getCurrentWindow } from '@/components/multi-window'
+import { breakpoints, descriptionsColumn } from '@/composables'
 
 interface Goods {
   id: number
@@ -68,14 +69,19 @@ const goodsSummaryMethod = createTableSummaryMethod<Goods>(
   ['price', 'totalPrice'],
 )
 
+// 小于sm的
+const ltSm = breakpoints.smaller('sm')
+
 const currentTab = ref('detail')
 </script>
 
 <template>
   <layout-page-header>
-    <flex class="py-4 items-center">
-      <span class="text-xl">单号：{{ orderId }}</span>
-      <div class="ml-auto">
+    <flex class="py-4 sm:items-center lt-sm:(space-y-2 flex-col)">
+      <div class="text-xl">
+        单号：{{ orderId }}
+      </div>
+      <div class="sm:ml-a">
         <el-button-group>
           <el-button>操作一</el-button>
           <el-button>操作二</el-button>
@@ -86,8 +92,8 @@ const currentTab = ref('detail')
       </div>
     </flex>
 
-    <flex>
-      <el-descriptions class="flex-1" :column="2">
+    <flex class="lt-sm:(flex-col-reverse)">
+      <el-descriptions class="flex-1" :column="descriptionsColumn">
         <el-descriptions-item label="创建人:">
           1000000000
         </el-descriptions-item>
@@ -108,10 +114,10 @@ const currentTab = ref('detail')
         </el-descriptions-item>
       </el-descriptions>
       <el-descriptions direction="vertical" class="summary">
-        <el-descriptions-item label="状态" align="right" label-align="right">
+        <el-descriptions-item label="状态" :align="ltSm ? 'left' : 'right'">
           <span>待审批</span>
         </el-descriptions-item>
-        <el-descriptions-item label="订单金额" align="right" label-align="right">
+        <el-descriptions-item label="订单金额" :align="ltSm ? 'left' : 'right'">
           <span>¥ 568.08</span>
         </el-descriptions-item>
       </el-descriptions>
@@ -124,10 +130,17 @@ const currentTab = ref('detail')
   </layout-page-header>
 
   <div p-3>
-    <el-space v-if="currentTab === 'detail'" fill direction="vertical" style="width: 100%">
-      <el-card header="流程进度">
-        <el-steps :active="2" align-center>
-          <el-step title="创建项目" description="曲丽丽（2021-11-21）" />
+    <div v-if="currentTab === 'detail'" class="space-y-4">
+      <el-card
+        header="流程进度"
+        :body-style="ltSm ? 'height: 280px; padding-bottom: 0px' : ''"
+      >
+        <el-steps
+          :active="2"
+          :direction="ltSm ? 'vertical' : 'horizontal'"
+          align-center
+        >
+          <el-step title="创建项目" description="曲丽丽(2021-11-21)" />
           <el-step title="部门初审" description="周毛毛" />
           <el-step title="财务复核" />
           <el-step title="完成" />
@@ -135,7 +148,7 @@ const currentTab = ref('detail')
       </el-card>
 
       <el-card header="用户信息">
-        <el-descriptions>
+        <el-descriptions :column="descriptionsColumn">
           <el-descriptions-item label="用户姓名:">
             付小小
           </el-descriptions-item>
@@ -154,7 +167,7 @@ const currentTab = ref('detail')
         </el-descriptions>
         <el-divider />
 
-        <el-descriptions title="信息组">
+        <el-descriptions title="信息组" :column="descriptionsColumn">
           <el-descriptions-item label="某某数据:">
             777
           </el-descriptions-item>
@@ -169,11 +182,11 @@ const currentTab = ref('detail')
           </el-descriptions-item>
         </el-descriptions>
 
-        <el-descriptions direction="vertical">
+        <el-descriptions direction="vertical" :column="descriptionsColumn">
           <el-descriptions-item label="信息组">
             <el-descriptions direction="vertical" border>
               <el-descriptions-item label="多层级信息组">
-                <el-descriptions title="组1">
+                <el-descriptions title="组1" :column="descriptionsColumn">
                   <el-descriptions-item label="某某数据:">
                     777
                   </el-descriptions-item>
@@ -188,7 +201,7 @@ const currentTab = ref('detail')
                   </el-descriptions-item>
                 </el-descriptions>
                 <el-divider />
-                <el-descriptions title="组2">
+                <el-descriptions title="组2" :column="descriptionsColumn">
                   <el-descriptions-item label="某某数据:">
                     777
                   </el-descriptions-item>
@@ -203,7 +216,7 @@ const currentTab = ref('detail')
                   </el-descriptions-item>
                 </el-descriptions>
                 <el-divider />
-                <el-descriptions title="组3">
+                <el-descriptions title="组3" :column="descriptionsColumn">
                   <el-descriptions-item label="某某数据:">
                     777
                   </el-descriptions-item>
@@ -255,7 +268,7 @@ const currentTab = ref('detail')
           </el-table-column>
         </el-table>
       </el-card>
-    </el-space>
+    </div>
 
     <el-card v-else-if="currentTab === 'rule'" header="规则">
       <el-empty :image-size="100" description="暂无规则" />
@@ -267,8 +280,6 @@ const currentTab = ref('detail')
 
 .summary {
   min-width: 242px;
-  margin-left: 88px;
-  text-align: right;
   span {
     font-size: 24px;
     color: #333;
