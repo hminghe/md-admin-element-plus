@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { type Dict, createTableSummaryMethod, dict2Map, formatAmount, formatNumber } from '@/utils'
+import { descriptionsColumn } from '@/composables'
 
 interface Goods {
   id: number
@@ -122,7 +123,7 @@ const goodsSummaryMethod = createTableSummaryMethod<Goods>(sumColumn, amountColu
   <layout-page-header title="基础详情页" />
 
   <el-card m-3>
-    <el-descriptions title="退款申请">
+    <el-descriptions title="退款申请" :column="descriptionsColumn">
       <el-descriptions-item label="取货单号:">
         1000000000
       </el-descriptions-item>
@@ -139,7 +140,7 @@ const goodsSummaryMethod = createTableSummaryMethod<Goods>(sumColumn, amountColu
 
     <el-divider />
 
-    <el-descriptions title="用户信息">
+    <el-descriptions title="用户信息" :column="descriptionsColumn">
       <el-descriptions-item label="用户姓名:">
         付小小
       </el-descriptions-item>
@@ -168,14 +169,14 @@ const goodsSummaryMethod = createTableSummaryMethod<Goods>(sumColumn, amountColu
       :summary-method="goodsSummaryMethod"
     >
       <el-table-column label="商品编号" prop="id" />
-      <el-table-column label="商品名称" prop="name" />
-      <el-table-column label="商品条码" prop="code" />
+      <el-table-column label="商品名称" prop="name" :min-width="90" />
+      <el-table-column label="商品条码" prop="code" :min-width="90" />
       <el-table-column label="单价" align="right" prop="price">
         <template #default="{ row }">
           {{ formatAmount(row.price) }}
         </template>
       </el-table-column>
-      <el-table-column label="数量（件）" align="right" prop="num">
+      <el-table-column label="数量(件)" align="right" prop="num" :min-width="100">
         <template #default="{ row }">
           {{ formatNumber(row.num) }}
         </template>
@@ -194,8 +195,8 @@ const goodsSummaryMethod = createTableSummaryMethod<Goods>(sumColumn, amountColu
     </div>
     <el-table border :data="returnProgress" :header-cell-style="{ background: '#f5f7fa' }">
       <el-table-column label="时间" prop="time" />
-      <el-table-column label="当前进度" prop="progress" />
-      <el-table-column label="状态" prop="status">
+      <el-table-column label="当前进度" prop="progress" :min-width="90" />
+      <el-table-column label="状态" prop="status" :min-width="90">
         <template #default="{ row }">
           <el-tag :type="statusMap[row.status].tag">
             {{ statusMap[row.status].label }}
