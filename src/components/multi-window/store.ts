@@ -1,8 +1,8 @@
 import { useTitle } from '@vueuse/core'
 import { ElScrollbar } from 'element-plus'
 import { type Component, computed, defineComponent, h, markRaw, reactive } from 'vue'
-
 import { type RouteLocationNormalizedLoaded, useRoute, useRouter } from 'vue-router'
+import NProgress from 'nprogress'
 import { baseComponentKey } from '.'
 
 const appName = (import.meta.env.VITE_APP_NAME || 'Admin') as string
@@ -18,7 +18,7 @@ export interface Window {
   componentName: string
   component?: Component
   baseComponent?: Component
-  close: () => void
+  close: (command?: string) => void
   refresh: () => void
   rename: (name: string) => void
 }
@@ -123,8 +123,12 @@ export default function useStore() {
       refreshCallback: [],
       componentName: route.name as string,
       baseComponent: markRaw(meta[baseComponentKey] as Component),
-      close() {
-        closeWindow(key)
+      close(command = 'self') {
+        if (command === 'self') {
+          closeWindow(key)
+        } else {
+          closeWindowForOther(window, command)
+        }
       },
       refresh() {
         refreshWindow(key)
@@ -153,11 +157,6 @@ export default function useStore() {
   }
 
   function closeWindow(windowOrKey: Window | string) {
-    // if (windows.length === 1) {
-    //   return
-    // }
-    //
-
     if (hasCurrentWindow(windowOrKey)) {
       router.back()
     }
@@ -201,6 +200,10 @@ export default function useStore() {
         } else {
           window.refreshKey++
           createWindowComponent(window)
+          NProgress.start()
+          setTimeout(() => {
+            NProgress.done()
+          }, 200)
         }
       }
       runStep()
