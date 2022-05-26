@@ -101,7 +101,7 @@ export default function useStore() {
             window.scrollTop = scrollTop
             window.scrollLeft = scrollLeft
           },
-        }, h(window.baseComponent!))
+        }, () => h(window.baseComponent!))
       },
     }))
   }

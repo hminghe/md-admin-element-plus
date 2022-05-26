@@ -8,8 +8,10 @@ const keepAliveInclude = computed(() => store.windows.map(item => item.component
 
 <template>
   <router-view v-slot="{ Component }">
-    <keep-alive :include="keepAliveInclude">
-      <component :is="Component" />
-    </keep-alive>
+    <multi-window-router-transition>
+      <keep-alive :include="keepAliveInclude">
+        <component :is="Component" />
+      </keep-alive>
+    </multi-window-router-transition>
   </router-view>
 </template>

@@ -1,9 +1,7 @@
 import { type RouteRecordRaw, onBeforeRouteUpdate } from 'vue-router'
-
 import { type AsyncComponentLoader, KeepAlive, h, provide } from 'vue'
-
+import MultiWindowRouterTransition from './MultiWindowRouterTransition.vue'
 import { type UseStore } from './store'
-
 import { baseComponentKey, injectionKey } from './'
 
 export function createMultiWindowComponentWrap(routeRaw: RouteRecordRaw, useStore: UseStore) {
@@ -57,9 +55,14 @@ export function createMultiWindowComponentWrap(routeRaw: RouteRecordRaw, useStor
         if (!component) {
           return null
         }
-        return h(KeepAlive, {
-          include: keepAliveInclude.value,
-        }, h(component))
+        return h(
+          MultiWindowRouterTransition,
+          () => h(
+            KeepAlive,
+            { include: keepAliveInclude.value },
+            h(component),
+          ),
+        )
       }
     },
   })
