@@ -8,7 +8,10 @@ const { menu } = useLayoutStore()
   <div
     v-if="!menu.isDrawer"
     class="layout-aside"
-    :style="{width: menu.isCollapse ? '64px' : '214px'}"
+    :style="{
+      width: menu.isCollapse ? '64px' : '214px',
+      minWidth: menu.isCollapse ? '64px' : '214px'
+    }"
   >
     <el-scrollbar style="flex: 1;">
       <LayoutAsideMenu :collapse="menu.isCollapse" />
