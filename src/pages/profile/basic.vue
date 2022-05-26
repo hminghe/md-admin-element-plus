@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { type Dict, createTableSummaryMethod, dict2Map, formatAmount, formatNumber } from '@/utils'
-import { descriptionsColumn } from '@/composables'
+import { descriptionsColumn, isDark } from '@/composables'
 
 interface Goods {
   id: number
@@ -165,7 +165,7 @@ const goodsSummaryMethod = createTableSummaryMethod<Goods>(sumColumn, amountColu
       border
       show-summary
       :data="goods"
-      :header-cell-style="{ background: '#f5f7fa' }"
+      :header-cell-style="isDark ? {} : { background: '#f5f7fa' }"
       :summary-method="goodsSummaryMethod"
     >
       <el-table-column label="商品编号" prop="id" />
@@ -193,7 +193,7 @@ const goodsSummaryMethod = createTableSummaryMethod<Goods>(sumColumn, amountColu
     <div class="title">
       退货进度
     </div>
-    <el-table border :data="returnProgress" :header-cell-style="{ background: '#f5f7fa' }">
+    <el-table border :data="returnProgress" :header-cell-style="isDark ? {} : { background: '#f5f7fa' }">
       <el-table-column label="时间" prop="time" />
       <el-table-column label="当前进度" prop="progress" :min-width="90" />
       <el-table-column label="状态" prop="status" :min-width="90">

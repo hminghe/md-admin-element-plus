@@ -115,7 +115,7 @@ const option4 = ref({
 <template>
   <div class="p-4 space-y-5">
     <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
-      <div class="bg-white" p="x6 t4 b2">
+      <el-card shadow="never">
         <div class="text-s mb-1 flex">
           <span class="flex-1">总销售额</span>
           <el-tooltip placement="top" content="指标说明">
@@ -135,9 +135,9 @@ const option4 = ref({
         <div border="t-1 gray-200" class="pt-2">
           日销售额 {{ formatAmount('1024') }} 元
         </div>
-      </div>
+      </el-card>
 
-      <div class="bg-white" p="x6 t4 b2">
+      <el-card shadow="never">
         <div class="text-s mb-1 flex">
           <span class="flex-1">总销售额</span>
           <el-tooltip placement="top" content="指标说明">
@@ -147,14 +147,19 @@ const option4 = ref({
         <div class="text-3xl">
           ￥{{ formatAmount('99999') }}
         </div>
-        <v-chart class="h-15" :option="option1" />
+        <div class="flex items-center h-15 ">
+          <span>周同比 12% </span>
+          <div i-ep-caret-top class="text-red-500 ml-1" />
+          <span class="ml-4">日同比 11% </span>
+          <div i-ep-caret-bottom class="text-green-500 ml-1" />
+        </div>
 
         <div border="t-1 gray-200" class="pt-2">
           日销售额 {{ formatAmount('1024') }} 元
         </div>
-      </div>
+      </el-card>
 
-      <div class="bg-white" p="x6 t4 b2">
+      <el-card shadow="never">
         <div class="text-s mb-1 flex">
           <span class="flex-1">总销售额</span>
           <el-tooltip placement="top" content="指标说明">
@@ -169,9 +174,9 @@ const option4 = ref({
         <div border="t-1 gray-200" class="pt-2">
           日销售额 {{ formatAmount('1024') }} 元
         </div>
-      </div>
+      </el-card>
 
-      <div class="bg-white" p="x6 t4 b2">
+      <el-card shadow="never">
         <div class="text-s mb-1 flex">
           <span class="flex-1">PV / UV</span>
           <el-tooltip placement="top" content="指标说明">
@@ -191,7 +196,7 @@ const option4 = ref({
         <div border="t-1 gray-200" class="pt-2">
           日 {{ formatNumber('333') }} PV
         </div>
-      </div>
+      </el-card>
     </div>
 
     <el-card shadow="never">
@@ -235,6 +240,12 @@ const option4 = ref({
     </el-card>
   </div>
 </template>
+
+<style scoped>
+.chart-cart {
+  /* background-color: ; */
+}
+</style>
 
 <route lang="yaml">
 meta:

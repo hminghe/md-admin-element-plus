@@ -6,6 +6,10 @@
   border-color: var(--el-border-color);
 }
 
+html {
+  background-color: #fff;
+}
+
 a {
   color: inherit;
   text-decoration: inherit;
@@ -53,6 +57,10 @@ html.dark {
 
 flex {
   display: flex;
+}
+
+.color-p {
+  color: var(--el-text-color-primary);
 }
 
 .color-r {

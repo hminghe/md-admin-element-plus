@@ -4,7 +4,6 @@ console.log('monitor date', date)
 </script>
 
 <template>
-  <layout-page>
-    <div>Monitor - {{ date }}</div>
-  </layout-page>
+  <layout-page-header />
+  <div>Monitor - {{ date }}</div>
 </template>

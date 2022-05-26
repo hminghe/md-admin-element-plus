@@ -24,6 +24,7 @@ defineProps<{
 <style lang="less">
 
 .layout-page-header {
+  background-color: var(--el-bg-color-overlay);
   .el-tabs {
     margin-top: 12px;
     margin-bottom: -12px;

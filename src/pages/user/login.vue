@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { type FormInstance, type FormRules } from 'element-plus'
 import { useUserStore } from '@/stores/user'
 import { login } from '@/api/user'
-import { useAsync } from '@/composables'
+import { isDark, toggleDark, useAsync } from '@/composables'
 
 const router = useRouter()
 const route = useRoute()
@@ -34,11 +34,17 @@ const rules: FormRules = {
 
 <template>
   <div class="login">
-    <div text-center>
+    <div my-4 text-right>
+      <el-button type="text" mr-5 @click="toggleDark()">
+        <div :class="isDark ? 'i-ep-moon' : 'i-ep-sunny'" text-xl />
+      </el-button>
+      <!-- <div text-xl px-4 @click="toggleDark()" /> -->
+    </div>
+    <div text-center pt-100px>
       <div>
-        <span font-600 text-4xl text-black:85>MDAdmin</span>
+        <span font-600 text-4xl class="color-p">MDAdmin</span>
       </div>
-      <div text-sm text-black:45 mt-sm mb-4xl>
+      <div text-sm mt-sm mb-4xl class="color-s">
         基于 Vue3 + Ts + Element Plus 的后台应用
       </div>
     </div>
@@ -85,9 +91,8 @@ const rules: FormRules = {
 .login {
   height: 100vh;
   overflow: auto;
-  background-color: #f0f2f5;
+  background-color: var(--el-bg-color-page);
   background-image: url(@/assets/login-bg.svg);
-  padding-top: 100px;
 }
 </style>
 

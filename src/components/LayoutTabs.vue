@@ -143,7 +143,7 @@ function onCloseWindow(fullPath: string) {
 <style lang="less" scoped>
 
 .layout-tabs {
-  background-color: #fff;
+  background-color: var(--el-bg-color-overlay);
   :deep(.el-tabs) {
     padding-top: 10px;
     .el-tabs__header {

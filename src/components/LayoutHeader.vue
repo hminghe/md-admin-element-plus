@@ -2,6 +2,7 @@
 import { loginPath } from '@/modules/user'
 import { useLayoutStore } from '@/stores/layout'
 import { useUserStore } from '@/stores/user'
+import { isDark, toggleDark } from '@/composables'
 
 const router = useRouter()
 
@@ -38,6 +39,10 @@ function onClickLogout() {
     <div style="flex: 1" />
     <el-space>
       <template v-if="!menu.isDrawer">
+        <div class="right-item" @click="toggleDark()">
+          <div v-if="isDark" i-ep-moon />
+          <div v-else i-ep-sunny />
+        </div>
         <div class="right-item">
           <div i-ep-help />
           <!-- <Help /> -->
