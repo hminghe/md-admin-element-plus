@@ -42,20 +42,17 @@ export default {
         name,
         children,
       } = menu
-      const title = () => (
-        <>
-          {icon && <el-icon><i className={`${icon}`}></i></el-icon>}
-          <span>{name}</span>
-        </>
-      )
+      const slots = {
+        default: () => icon && <el-icon><i className={`${icon}`}></i></el-icon>,
+        title: () => <span>{name}</span>,
+      }
 
       if (children && children.length) {
         return (
           <el-sub-menu
             index={path}
             key={path}
-            v-slots={{ title }}
-            background-color="red"
+            v-slots={{ title: () => [slots.default(), slots.title()] }}
           >
             {renderMenuList(children)}
           </el-sub-menu>
@@ -66,7 +63,7 @@ export default {
             key={path}
             index={path}
             router={path}
-            v-slots={{ title }}
+            v-slots={ slots }
             onClick={() => onClickMenu(menu)}
           >
           </el-menu-item>
