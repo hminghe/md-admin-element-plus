@@ -10,10 +10,10 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@vueuse/core": "^8.3.0",
+    "@vueuse/core": "^8.5.0",
     "axios": "^0.26.1",
     "echarts": "^5.3.2",
-    "element-plus": "^2.1.9",
+    "element-plus": "^2.2.2",
     "nprogress": "^0.2.0",
     "numeral": "^2.0.6",
     "omit": "^1.0.1",
