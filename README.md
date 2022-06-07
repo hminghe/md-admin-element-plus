@@ -31,7 +31,7 @@ Mocking up web app with <b>MDAdmin</b><sup><em>(speed)</em></sup><br>
 <br>
 
 <p align='center'>
-<b>English</b> | <a href="/hminghe/md-admin-element-plus/blob/main/README.zh-CN.md">简体中文</a>
+<b>English</b> | <a href="./README.zh-CN.md">简体中文</a>
 <!-- Contributors: Thanks for geting interested, however we DON'T accept new transitions to the README, thanks. -->
 </p>
 

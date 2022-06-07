@@ -32,7 +32,7 @@
 <br>
 
 <p align='center'>
-<a href="/hminghe/md-admin-element-plus/blob/main/README.md">English</a> | <b>简体中文</b>
+<a href="./README.md">English</a> | <b>简体中文</b>
 </p>
 
 <br>
