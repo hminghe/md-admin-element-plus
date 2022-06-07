@@ -120,7 +120,7 @@ function onCloseWindow(fullPath: string) {
   </div>
 
   <el-card
-    v-show="contextMenu.show"
+    v-if="contextMenu.show"
     ref="contextMenu$"
     class="absolute z-10 transition-none"
     :body-style="{ padding: 0 }"
