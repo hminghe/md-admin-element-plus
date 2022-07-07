@@ -1,9 +1,8 @@
 import { useTitle } from '@vueuse/core'
+import { acceptHMRUpdate, defineStore } from 'pinia'
 import { ElScrollbar } from 'element-plus'
 import { type Component, computed, defineComponent, h, markRaw, reactive } from 'vue'
 import { type RouteLocationNormalizedLoaded, useRoute, useRouter } from 'vue-router'
-import NProgress from 'nprogress'
-import { baseComponentKey } from '.'
 
 const appName = (import.meta.env.VITE_APP_NAME || 'Admin') as string
 
@@ -23,24 +22,22 @@ export interface Window {
   rename: (name: string) => void
 }
 
-export default function useStore() {
+export const useMultiWindowStore = defineStore('multiWindow', () => {
   const router = useRouter()
   const route = useRoute()
 
   const windows = reactive<Window[]>([])
-  // const currentWindow = ref<Window | null>(null)
-  const currentWindow = computed(() => {
-    return findWindowByFullPath(route.fullPath)
-  })
+  const currentWindow = computed(() => findWindowByFullPath(route.fullPath))
   const lastWindow = ref<Window>()
   watch(currentWindow, (_, old) => {
     lastWindow.value = old
   })
+  const keepAliveInclude = computed(() => windows.map(window => `${window.fullPath}-${window.refreshKey}`))
 
-  const title = computed(() => {
+  // auto set title
+  useTitle(computed(() => {
     return currentWindow.value ? `${currentWindow.value.name} - ${appName}` : appName
-  })
-  useTitle(title)
+  }))
 
   function findWindow(windowOrKey: Window | string) {
     const key = typeof windowOrKey === 'string' ? windowOrKey : windowOrKey.key
@@ -110,6 +107,7 @@ export default function useStore() {
     const {
       fullPath,
       meta,
+      matched,
     } = to
 
     const key = `${fullPath}-${Date.now().toString()}`
@@ -122,7 +120,7 @@ export default function useStore() {
       refreshKey: 1,
       refreshCallback: [],
       componentName: route.name as string,
-      baseComponent: markRaw(meta[baseComponentKey] as Component),
+      baseComponent: markRaw(matched[matched.length - 1].components.default),
       close(command = 'self') {
         if (command === 'self') {
           closeWindow(key)
@@ -200,10 +198,6 @@ export default function useStore() {
         } else {
           window.refreshKey++
           createWindowComponent(window)
-          NProgress.start()
-          setTimeout(() => {
-            NProgress.done()
-          }, 200)
         }
       }
       runStep()
@@ -219,7 +213,9 @@ export default function useStore() {
 
   return {
     currentWindow,
+    lastWindow,
     windows,
+    keepAliveInclude,
     hasCurrentWindow,
     findWindow,
     findWindowByFullPath,
@@ -231,8 +227,11 @@ export default function useStore() {
     closeWindowForOther,
     refreshWindow,
     windowRename,
-    lastWindow,
   }
-}
+})
 
-export type UseStore = typeof useStore
+export type UseMultiWindowStore = typeof useMultiWindowStore
+
+if (import.meta.hot) {
+  import.meta.hot.accept(acceptHMRUpdate(useMultiWindowStore, import.meta.hot))
+}

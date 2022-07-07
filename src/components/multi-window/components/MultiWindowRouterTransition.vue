@@ -1,7 +1,7 @@
 <template>
   <transition
     mode="out-in"
-    name="window-transition"
+    name="multi-window-transition"
     appear
   >
     <slot />
@@ -9,28 +9,28 @@
 </template>
 
 <style>
-.window-transition-enter-active {
+.multi-window-transition-enter-active, .multi-window-transition-leave-active {
   transition-property: opacity, transform;
-  transition-duration: .2s;
+  transition-duration: .15s;
 }
 
-.window-transition-enter-from {
+.multi-window-transition-enter-from {
   opacity: .5;
   transform: translateX(-20px);
 }
 
-.window-transition-enter-to {
+.multi-window-transition-enter-to {
   opacity: 1;
   transform: translateX(0);
 }
 
-/* .window-transition-leave-from {
+.multi-window-transition-leave-from {
   opacity: 1;
   transform: translateX(0);
 }
 
-.window-transition-leave-to {
+.multi-window-transition-leave-to {
   opacity: 0;
   transform: translateX(20px);
-} */
+}
 </style>

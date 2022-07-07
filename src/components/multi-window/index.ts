@@ -1,23 +1,14 @@
-import { type InjectionKey, type Ref, inject, onBeforeUnmount } from 'vue'
+import { onBeforeUnmount } from 'vue'
+import type { Window } from './useMultiWindowStore'
+import { useMultiWindowStore } from './useMultiWindowStore'
 
-import { type UseStore, type Window } from './store'
-
-export const injectionKey: InjectionKey<{
-  window: Ref<Window>
-  store: ReturnType<UseStore>
-}> = Symbol('multi-window')
-
-export const baseComponentKey = Symbol('base-component')
+export * from './setupMultiWindow'
+export * from './useMultiWindowStore'
+export * from './wrapperComponent'
 
 export function getCurrentWindow(): Window {
-  const _inject = inject(injectionKey)
-
-  if (!_inject || !_inject.store) {
-    console.warn('不是多窗口组件页面')
-    // return null
-  }
-  const route = useRoute()
-  return _inject!.store.findWindowByFullPath(route.fullPath)!
+  const store = useMultiWindowStore()
+  return store.currentWindow!
 }
 
 export function onRefresh(callback: (next: () => void) => void) {

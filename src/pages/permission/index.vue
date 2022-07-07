@@ -2,7 +2,7 @@
 import { useUserStore } from '@/stores/user'
 import { login } from '@/api/user'
 import { usePermissionStore } from '@/stores/permission'
-import { useMultiWindowStore } from '@/stores/multiWindow'
+import { useMultiWindowStore } from '@/components/multi-window'
 const userStore = useUserStore()
 const { hasPermission } = usePermissionStore()
 const multiWindowStore = useMultiWindowStore()

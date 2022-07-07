@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 // import { OnClickOutside } from '@vueuse/components'
-import { useMultiWindowStore } from '@/stores/multiWindow'
-import { type Window } from '@/components/multi-window/store'
 
 // import dropdown css
 import 'element-plus/es/components/dropdown/style/css'
+import type { Window } from './multi-window'
+import { useMultiWindowStore } from './multi-window'
 
 const router = useRouter()
 const multiWindowStore = useMultiWindowStore()
