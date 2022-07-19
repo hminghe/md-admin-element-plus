@@ -86,12 +86,6 @@ export default defineConfig({
     Inspect(),
   ],
 
-  server: {
-    watch: {
-      usePolling: true,
-    },
-  },
-
   build: {
     // cssCodeSplit: false,
     rollupOptions: {
