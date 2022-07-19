@@ -106,7 +106,7 @@ function onCloseWindow(fullPath: string) {
     <el-tabs
       type="card"
       closable
-      :model-value="multiWindowStore.currentWindow?.fullPath"
+      :model-value="multiWindowStore.currentWindow?.fullPath || 'null'"
       :before-leave="fullPath => onSwitchWindow(fullPath.toString())"
       @tab-remove="fullPath => onCloseWindow(fullPath.toString())"
     >

@@ -1,4 +1,4 @@
-import { useTitle } from '@vueuse/core'
+import { useTitle, watchOnce } from '@vueuse/core'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { ElScrollbar } from 'element-plus'
 import { type Component, computed, defineComponent, h, markRaw, reactive } from 'vue'
@@ -120,7 +120,7 @@ export const useMultiWindowStore = defineStore('multiWindow', () => {
       refreshKey: 1,
       refreshCallback: [],
       componentName: route.name as string,
-      baseComponent: markRaw(matched[matched.length - 1].components.default),
+      baseComponent: markRaw(matched[matched.length - 1].components!.default),
       close(command = 'self') {
         if (command === 'self') {
           closeWindow(key)
@@ -156,13 +156,17 @@ export const useMultiWindowStore = defineStore('multiWindow', () => {
 
   function closeWindow(windowOrKey: Window | string) {
     if (hasCurrentWindow(windowOrKey)) {
+      watchOnce(() => route.fullPath, () => {
+        closeWindow(windowOrKey)
+      })
+
       router.back()
-    }
+    } else {
+      const index = findWindowIndex(windowOrKey)
 
-    const index = findWindowIndex(windowOrKey)
-
-    if (index > -1) {
-      windows.splice(index, 1)
+      if (index > -1) {
+        windows.splice(index, 1)
+      }
     }
   }
 
