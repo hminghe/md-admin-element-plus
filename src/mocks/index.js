@@ -30,6 +30,8 @@ const userMap = {
         ]),
         createMenu('列表页', 'i-ep-grid', '/list', [
           createMenu('查询列表', '', '/list/table'),
+          createMenu('TablePro', '', '/list/table-pro'),
+          createMenu('自定义布局(TablePro)', '', '/list/table-pro-layout'),
         ]),
         createMenu('详情页', 'i-ep-document', '/profile', [
           createMenu('基础详情页', '', '/profile/basic'),

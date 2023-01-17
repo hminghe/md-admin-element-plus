@@ -10,7 +10,8 @@
     "typecheck": "vue-tsc --noEmit"
   },
   "dependencies": {
-    "@vueuse/core": "^8.9.4",
+    "@vue-plus/element-plus": "^0.0.7",
+    "@vueuse/core": "^8.5.0",
     "axios": "^0.26.1",
     "echarts": "^5.3.3",
     "element-plus": "^2.2.9",
