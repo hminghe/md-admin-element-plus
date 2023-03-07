@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { getCurrentWindow } from '@vue-plus/multi-window'
 import { useAsync, useForm } from '@/composables'
-import { getCurrentWindow } from '@/components/multi-window'
 
 const currentWindow = getCurrentWindow()
 

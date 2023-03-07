@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
+import { getCurrentWindow } from '@vue-plus/multi-window'
 import { createTableSummaryMethod, formatAmount, formatNumber } from '@/utils'
-import { getCurrentWindow } from '@/components/multi-window'
 import { breakpoints, descriptionsColumn } from '@/composables'
 
 interface Goods {

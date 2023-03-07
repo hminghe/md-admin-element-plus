@@ -1,5 +1,5 @@
 <script setup lang="ts">
-
+import { MultiWindowRouter } from '@vue-plus/multi-window'
 </script>
 
 <template>
@@ -10,7 +10,7 @@
 
       <el-container direction="vertical" class="layout-main">
         <LayoutTabs />
-        <multi-window-router />
+        <MultiWindowRouter />
       </el-container>
     </el-container>
   </el-container>
@@ -24,5 +24,6 @@
 .layout-main {
   // background-color: #f0f2f5;
   background-color: var(--el-bg-color-page);
+  overflow: auto;
 }
 </style>

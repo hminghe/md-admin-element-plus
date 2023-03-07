@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { getCurrentWindow, onRefresh } from '@vue-plus/multi-window'
 import { ElMessage } from 'element-plus'
 import { useRoute, useRouter } from 'vue-router'
-import { getCurrentWindow, onRefresh } from '@/components/multi-window'
 
 const router = useRouter()
 const route = useRoute()

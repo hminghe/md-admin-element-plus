@@ -4,8 +4,8 @@ import { useRouter } from 'vue-router'
 
 // import dropdown css
 import 'element-plus/es/components/dropdown/style/css'
-import type { Window } from './multi-window'
-import { useMultiWindowStore } from './multi-window'
+import type { Window } from '@vue-plus/multi-window'
+import { useMultiWindowStore } from '@vue-plus/multi-window'
 
 const router = useRouter()
 const multiWindowStore = useMultiWindowStore()

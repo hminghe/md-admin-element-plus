@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { getCurrentWindow } from '@/components/multi-window'
+import { getCurrentWindow } from '@vue-plus/multi-window'
+
 const currentWindow = getCurrentWindow()
 </script>
 
